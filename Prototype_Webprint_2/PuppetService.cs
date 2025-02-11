@@ -16,13 +16,13 @@ namespace Prototype_Webprint_2
             {
                 Headless = true,
                 ExecutablePath = installedBrowser.GetExecutablePath(),
-                Args = ["--disable-web-security"]
+                Args = ["--disable-web-security"] // Get CORS errors without this
             });
 
             // Open a new page
             await using var page = await browser.NewPageAsync();
 
-            // Subscribe to console events
+            // Pass browser console events to the dotnet console for debugging
             page.Console += (sender, e) => Console.WriteLine($"Console log: {e.Message.Text}");
 
             // URL of the service this is hosted on
